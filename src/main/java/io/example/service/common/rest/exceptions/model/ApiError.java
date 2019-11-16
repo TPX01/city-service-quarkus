@@ -1,5 +1,11 @@
 package io.example.service.common.rest.exceptions.model;
 
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
+@NoArgsConstructor
+@Data
 public class ApiError {
 
     public enum Type {
@@ -12,9 +18,6 @@ public class ApiError {
     private String originalValue;
     private String spanId;
     private Throwable throwable;
-
-    public ApiError() {
-    }
 
     public ApiError(Type type, String description) {
         this.type = type;
@@ -40,64 +43,5 @@ public class ApiError {
         this.fieldName = fieldName;
         this.originalValue = originalValue;
         this.throwable = throwable;
-    }
-
-    public Type getType() {
-        return type;
-    }
-
-    public void setType(Type type) {
-        this.type = type;
-    }
-
-    public String getDescription() {
-        return description;
-    }
-
-    public void setDescription(String description) {
-        this.description = description;
-    }
-
-    public String getFieldName() {
-        return fieldName;
-    }
-
-    public void setFieldName(String fieldName) {
-        this.fieldName = fieldName;
-    }
-
-    public String getOriginalValue() {
-        return originalValue;
-    }
-
-    public void setOriginalValue(String originalValue) {
-        this.originalValue = originalValue;
-    }
-
-    public String getSpanId() {
-        return spanId;
-    }
-
-    public void setSpanId(String spanId) {
-        this.spanId = spanId;
-    }
-
-    public Throwable getThrowable() {
-        return throwable;
-    }
-
-    public void setThrowable(Throwable throwable) {
-        this.throwable = throwable;
-    }
-
-    @Override
-    public String toString() {
-        return "ServiceError{" +
-                "type=" + type +
-                ", description='" + description + '\'' +
-                ", fieldName='" + fieldName + '\'' +
-                ", originalValue='" + originalValue + '\'' +
-                ", spanId='" + spanId + '\'' +
-                '}';
     }
 }

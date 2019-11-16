@@ -1,20 +1,23 @@
 package io.example.service.city.repository.model;
 
 import io.quarkus.hibernate.orm.panache.PanacheEntity;
+import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
 
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.Objects;
 
+@Data
 @Entity
 @Table(name = "CITY")
 public class CityEntity extends PanacheEntity implements Serializable {
-
-  public static final String QUERY_BY_COUNTRY = "SELECT c " +
+  public static final String QUERY_BY_COUNTRY =
+          "SELECT c " +
           "FROM CityEntity c " +
           "WHERE c.countryCode = :" + CityEntity.PARAM_COUNTRY_CODE + " " +
           "ORDER BY c.zipCode ASC";
-
   public static final String PARAM_COUNTRY_CODE = "countryCode";
 
   @Id
@@ -26,47 +29,5 @@ public class CityEntity extends PanacheEntity implements Serializable {
 
   @Column(name = "COUNTRY_IDN")
   private String countryCode;
-
-  public String getCityIdn() {
-    return cityIdn;
-  }
-
-  public void setCityIdn(String cityIdn) {
-    this.cityIdn = cityIdn;
-  }
-
-  public String getZipCode() {
-    return zipCode;
-  }
-
-  public void setZipCode(String zipCode) {
-    this.zipCode = zipCode;
-  }
-
-  public String getCountryCode() {
-    return countryCode;
-  }
-
-  public void setCountryCode(String countryCode) {
-    this.countryCode = countryCode;
-  }
-
-  @Override
-  public final boolean equals(Object object) {
-    if (this == object) {
-      return true;
-    }
-    if (!(object instanceof CityEntity)) {
-      return false;
-    }
-    CityEntity that = (CityEntity) object;
-    return Objects.equals(cityIdn, that.cityIdn);
-  }
-
-  @Override
-  public final int hashCode() {
-    return Objects.hash(cityIdn);
-  }
-
 }
 

@@ -2,11 +2,17 @@ package io.example.service.common.tracing;
 
 import io.opentracing.Span;
 import io.opentracing.util.GlobalTracer;
+import lombok.Getter;
 
 public class Trace {
 
+    @Getter
     private String traceId;
+
+    @Getter
     private String spanId;
+
+    @Getter
     private String parentSpanId;
 
     private Trace(Span activeSpan) {
@@ -22,17 +28,5 @@ public class Trace {
 
     public static Trace get() {
         return new Trace(GlobalTracer.get().activeSpan());
-    }
-
-    public String getTraceId() {
-        return traceId;
-    }
-
-    public String getSpanId() {
-        return spanId;
-    }
-
-    public String getParentSpanId() {
-        return parentSpanId;
     }
 }
