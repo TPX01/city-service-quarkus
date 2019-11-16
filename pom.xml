@@ -106,6 +106,12 @@
       <artifactId>swagger-annotations</artifactId>
     </dependency>
 
+    <!-- TRACING -->
+    <dependency>
+      <groupId>io.opentracing.contrib</groupId>
+      <artifactId>opentracing-jdbc</artifactId>
+    </dependency>
+
     <!-- ARCHUNIT -->
     <dependency>
       <groupId>com.tngtech.archunit</groupId>
