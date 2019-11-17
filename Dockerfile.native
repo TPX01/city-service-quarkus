@@ -1,20 +1,6 @@
-####
-# This Dockerfile is used in order to build a container that runs the Quarkus application in native (no JVM) mode
-#
-# Before building the docker image run:
-#
-# mvn package -Pgenerate-api,native -Dquarkus.native.container-build=true
-#
-# Then, build the image with:
-#
-# docker build -f Dockerfile.native -t city-service-quarkus-native .
-#
-# Then run the container using:
-#
-# docker run -i --rm -p 8080:8080 city-service-quarkus-native
-#
-###
 FROM registry.access.redhat.com/ubi8/ubi-minimal
+ENV ZIPCODE_SERVICE_URL=""
+ENV JAEGER_HOST_PORT=""
 WORKDIR /work/
 COPY target/*-runner /work/application
 RUN chmod 775 /work

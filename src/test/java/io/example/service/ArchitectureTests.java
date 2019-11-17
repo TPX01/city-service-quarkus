@@ -10,7 +10,6 @@ import java.util.concurrent.CompletableFuture;
 import java.util.stream.Stream;
 
 import static com.tngtech.archunit.lang.syntax.ArchRuleDefinition.methods;
-import static com.tngtech.archunit.library.Architectures.layeredArchitecture;
 
 public class ArchitectureTests {
 
@@ -18,7 +17,7 @@ public class ArchitectureTests {
 
     @Test
     public void onion_architecture_layers_are_respected() {
-        //TODO
+        //TODO Adapt this test
         /*JavaClasses importedClasses = new ClassFileImporter()
                 .withImportOption(new ImportOption.DoNotIncludeTests()).importPackages(BASE_PACKAGE);
         ArchRule rule = layeredArchitecture()

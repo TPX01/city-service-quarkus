@@ -15,11 +15,11 @@ services:
       - "9411:9411"
     restart: unless-stopped
   city-service:
-    image: city-service
+    image: city-service-quarkus
     container_name: city_service
     environment:
       - ZIPCODE_SERVICE_URL=http://localhost:8080
-      - JAEGER_HOST=jaeger
+      - JAEGER_HOST_PORT=jaeger
     depends_on:
       - "jaeger"
     links:
