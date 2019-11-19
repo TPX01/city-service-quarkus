@@ -200,6 +200,7 @@
                 <configuration>
                   <systemProperties>
                     <native.image.path>${project.build.directory}/${project.build.finalName}-runner</native.image.path>
+                    <additionalBuildArgs>-J-Xmx2G</additionalBuildArgs>
                   </systemProperties>
                 </configuration>
               </execution>
