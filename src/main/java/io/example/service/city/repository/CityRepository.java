@@ -13,6 +13,6 @@ public class CityRepository implements PanacheRepository<CityEntity> {
     public Stream<CityEntity> getCitiesByCountryIdn(String countryCode) {
         Parameters params = new Parameters();
         params.and(CityEntity.PARAM_COUNTRY_CODE, countryCode);
-        return CityEntity.stream(CityEntity.QUERY_BY_COUNTRY, params);
+        return stream(CityEntity.QUERY_BY_COUNTRY, params);
     }
 }
