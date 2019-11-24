@@ -15,15 +15,20 @@ services:
       - "9411:9411"
     restart: unless-stopped
   city-service:
-    image: city-service-quarkus
-    container_name: city_service
+    image: city-service-quarkus:latest
+    container_name: city-service
     environment:
       - ZIPCODE_SERVICE_URL=http://localhost:8080
       - JAEGER_HOST_PORT=jaeger
+      - JDBC_URL=jdbc:tracing:h2:tcp://h2-database:1521/default
+      - JDBC_DIALECT=org.hibernate.dialect.H2Dialect
+      - JDBC_USERNAME=sa
     depends_on:
       - "jaeger"
+      - "h2-database"
     links:
       - jaeger:jaeger
+      - h2-database:h2-database
     networks:
       - local_network
     ports:
@@ -43,6 +48,16 @@ services:
     ports:
       - 9090:9090
     restart: unless-stopped
+  h2-database:
+    image: oscarfonts/h2
+    container_name: h2-database
+    environment:
+      - H2_OPTIONS=-ifNotExists
+    networks:
+      - local_network
+    ports:
+      - 1521:1521
+      - 81:81
 
 networks:
   local_network:

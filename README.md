@@ -18,23 +18,31 @@ Create a pull request ;)
 
 ## Getting started :running:
 
+Keep into account that you need to run a H2 database (or some other database) yourself.
+Skip to the docker-compose file to see a fully working version without any configuration.
+
 ### Intellij
 1. 'Add new configuration > Maven'
 2. You can add following command line
- `compile quarkus:dev -DZIPCODE_SERVICE_URL=http://localhost:8080 -DJAEGER_HOST_PORT=localhost`
+ `compile quarkus:dev`
+3. Setup environment variables in the runner tab:
+```
+JDBC_URL=jdbc:tracing:h2:tcp://localhost:1521/default;JDBC_DIALECT=org.hibernate.dialect.H2Dialect;ZIPCODE_SERVICE_URL=http://localhost:8080;JDBC_USERNAME=sa;JAEGER_HOST_PORT=localhost
+```
  
 Alternatively you can also start quarkus using the quarkus maven plugin by executing 'quarkus:dev"
 
 ### Using the jar
 Simply run this command from the project root folder:
 ```
-java -DZIPCODE_SERVICE_URL=http://localhost:8080 -DJAEGER_HOST_PORT=localhost -jar target/*-runner.jar
+java -DZIPCODE_SERVICE_URL=.. -jar target/*-runner.jar
 ```
+Don't forget to add your properties with  `-D` in the command above.
 
 ### Maven
 You can also easily run it using this maven command:
 ```
-   mvn quarkus:dev -Dthorntail.properties.zipcode-service.url=http://localhost:8080
+   mvn quarkus:dev -DZIPCODE_SERVICE_URL=..
 ```
 
 ## Demo time :eyes:
@@ -97,6 +105,8 @@ Then run the container using:
 
 #### Native
 
+Note: Building this service with an in memory H2 will not work!
+
 This Dockerfile is used in order to build a container that runs the Quarkus application in native (no JVM) mode
 
 Before building the docker image run:
@@ -107,7 +117,7 @@ Creating these native images takes up a lot of compute power. To avoid it going 
 
 Then, build the image with:
 
-`$ docker build -f Dockerfile.native -t city-service-quarkus-native .`
+`$ docker build -f Dockerfile.native -t city-service-quarkus .`
 
 Then run the container using:
 
